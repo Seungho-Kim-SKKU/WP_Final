@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Alata', sans-serif;
+}
+
+.home {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    position: relative;
+    background-color: black;
+    color: black;
+    z-index: 1;
+}
+
+.home::after {
+    width: 100vw;
+    height: 100vh;
+    content: "";
+    text-align: center;
+    background: url("../image/background.jpg");
+    position: absolute;
+    top: 0;
+    left: 0;    
+    z-index: -1;
+    opacity: 0.7;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;   
+    width: 500px;
+    height: 400px;
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(238,238,238,1) 50%, rgba(255,255,255,1) 100%);
+    border-radius: 10px;
+}
+
+.login-container .login-create-profile{
+    margin-top: 40px;
+}
+
+.login-container .login-create-profile span{
+    font-size: 15px;
+}
+
+.login-container .login-create-profile .create-profile-button{
+    background: white;
+    width: 100px;
+    height: 35px;
+    font-size: 15px;
+    border-color: white;
+    border-radius: 5px;
+    color: rgba(0, 153, 255, 0.897);
+}
+
+.login-input-container {
+    margin-top: 50px;
+}
+
+.login-input-container .login-input {
+    width: 300px;
+    border-radius: 2px;
+    border-bottom: solid 2px #2178ff;
+    margin-bottom: 20px;
+}
+
+.login-id i {
+    color: black;
+    line-height: 45px;
+}
+
+.login-input-container input { 
+    border: none;
+    background: none;
+    line-height: 45px;
+    width: 260px;
+    padding-left: 10px;
+}
+
+.login-input-container input:focus {
+    outline: none;
+}
+
+.login-btn-container {
+    margin-top: 50px;
+}
+
+.login-btn-container .login-btn {
+    width: 100px;
+    height: 40px;
+    font-size: 22px;
+    border-radius: 5px;
+    border-color: #2178ff;
+    background-color: #2178ff;
+    color: white;
+}

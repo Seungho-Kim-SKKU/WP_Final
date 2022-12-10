@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoPW</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="../css/pwgen.css" rel="stylesheet">
+</head>
+<body>    
+    <div class="home">
+        <div class="menu">
+            <nav>
+                <ul>
+                  <li><a href="./main">Home</a></li> 
+                  <li><a href="./hash">Hash</a></li>
+                  <li><a href="./pwgen">Password Generator</a></li>
+                  <li><a href="./profile">Profile</a></li>
+                  <li><a href="./logout">Logout</a></li>
+              </ul>
+              <a id="pull" href="#"></a>
+            </nav>
+        </div>
+        <div class="content">
+            <div class="pw-gen">
+                <h2>Password Generator</h2>
+                <div class="result-container">
+                    <input type="text" class="result">
+                    <button class="copy-result-btn">Copy</button>
+                </div>
+                <div class="cond">
+                    <div class="cond-container">
+                        <label>Password length (6-20)</label>
+                        <input type="range" class="cond-length" min='6' max='20' step="1" value="10"/>
+                        <span class="length">10</span>
+                    </div>
+                    <div class="cond-container">
+                        <label>Include numbers</label> 
+                        <input type="checkbox" class="number" checked />
+                    </div>
+                    <div class="cond-container">
+                        <label>Include symbols</label> 
+                        <input type="checkbox" class="symbol" checked />
+                    </div>
+                </div>
+                <button class="generate-btn">Generate</button>
+            </div>            
+        </div>       
+    </div>
+
+    <script>
+        $('.cond-length').change(function() {
+            $('.length').text($('.cond-length').val());
+        });
+
+        $(window).on('load', function() {
+            let pw = generatePassword(1, 1, 10);
+            $('.result').attr('value', shuffle(pw));
+        });
+
+        $('.generate-btn').click(function() {
+            let len = $('.cond-length').val();
+            let num = $('.number').is(':checked');
+            let sym = $('.symbol').is(':checked');
+
+            let pw = generatePassword(num, sym, len);
+            $('.result').attr('value', shuffle(pw));
+        });
+
+        function getRandomLower() {
+            return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+        }
+        function getRandomNumber() {
+            return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+        }
+        function getRandomSymbol() {
+            const symbols = '!@#$%^&*()';
+            return symbols[Math.floor(Math.random() * symbols.length)];
+        }
+
+        function generatePassword(number, symbol, length) {
+            let generatedPassword = '';
+            let variationsCount = [number, symbol].length
+  
+            for(let i = 0; i < length; i += variationsCount) {
+                if (number) {
+                    generatedPassword += getRandomNumber();
+                } 
+                if (symbol) {
+                    generatedPassword += getRandomSymbol();
+                }
+                generatedPassword += getRandomLower();
+            }
+
+            const finalPassword = generatedPassword.slice(0, length); 
+
+            return finalPassword;
+        }
+
+        function shuffle(s) {
+            let arr = s.split(''), arr_len = arr.length;
+    
+            while (arr_len) {
+                let rnd = Math.floor(Math.random() * arr_len--);
+                [arr[arr_len], arr[rnd]] = [arr[rnd] , arr[arr_len]];
+            }
+    
+            let str = arr.join('');
+            return str;
+        }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+</body>
+</html>
